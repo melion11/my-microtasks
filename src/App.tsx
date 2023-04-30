@@ -13,7 +13,7 @@ function App() {
     <div className="App">
       <Cars cars={topCars}/>
     </div>
-  );
+  )
 }
 
 export default App;

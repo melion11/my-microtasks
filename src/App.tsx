@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import {Button} from './microtasks/button/Button';
+import NewComponent from './microtasks/filter/FilterMoney';
 
-type FilterType = 'All' | 'Dollar' | 'Rubls'
+export type FilterType = 'All' | 'Dollar' | 'Rubls'
 
 
 function App() {
@@ -20,7 +20,6 @@ function App() {
    const [filter, setFilter] = useState<FilterType>('All')
 
     let currentMoney = money;
-
     if (filter === 'Dollar') {
         currentMoney = money.filter(filteredMoney => filteredMoney.banknots === 'Dollars')
     }
@@ -33,23 +32,26 @@ function App() {
     }
 
     return (
-        <div className={'money-wrap'}>
-            <ul className="money-list">
-                {currentMoney.map((m, index) => {
-                    return (
-                        <li key={index}>
-                            <span>{m.banknots} </span>
-                            <span>{m.value} </span>
-                            <span>{m.number} </span>
-                        </li>
-                    );
-                })}
-            </ul>
-            <div style={{marginLeft: '35px'}}>
-                <Button name={'Dollar'} callBack={() => onClickFilterHandler('Dollar')}/>
-                <Button name={'Rubls'} callBack={() => onClickFilterHandler('Rubls')}/>
-                <Button name={'All'} callBack={() => onClickFilterHandler('All')}/></div>
-        </div>
+        <NewComponent currentMoney={currentMoney} onClickFilterHandler={onClickFilterHandler}/>
+        // <div className={'money-wrap'}>
+        //     <ul className="money-list">
+        //         {currentMoney.map((m, index) => {
+        //             return (
+        //                 <li key={index}>
+        //                     <span>{m.banknots} </span>
+        //                     <span>{m.value} </span>
+        //                     <span>{m.number} </span>
+        //                 </li>
+        //             );
+        //         })}
+        //     </ul>
+        //     <div style={{marginLeft: '35px'}}>
+        //         <Button name={'Dollar'} callBack={() => onClickFilterHandler('Dollar')}/>
+        //         <Button name={'Rubls'} callBack={() => onClickFilterHandler('Rubls')}/>
+        //         <Button name={'All'} callBack={() => onClickFilterHandler('All')}/></div>
+        // </div>
+
+
     )
 }
 

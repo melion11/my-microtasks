@@ -1,44 +1,54 @@
 import React, {useState} from 'react';
-import {Cars, carType} from './map/topCars';
-import {Button} from './button/Button';
+import {Button} from './microtasks/button/Button';
+
+type FilterType = 'All' | 'Dollar' | 'Rubls'
+
 
 function App() {
-    const topCars: carType[] = [
-        {manufacturer: 'BMW', model: 'm5cs'},
-        {manufacturer: 'Mercedes', model: 'e63s'},
-        {manufacturer: 'Audi', model: 'rs6'}
-    ]
 
-    // const ButtonFoo1 = (name:string) => {
-    //     console.log(name)
-    // }
-    //
-    // const ButtonFoo2 = (name:string) => {
-    //     console.log(name)
-    // }
-    //
-    // const ButtonFoo3 = () => {
-    //     console.log('im stupid button')
-    // }
+    let [money, setMoney] = useState ([
+        {banknots: 'Dollars', value: 100, number: ' a1234567890'},
+        {banknots: 'Dollars', value: 50, number: ' z1234567890'},
+        {banknots: 'RUBLS', value: 100, number: ' w1234567890'},
+        {banknots: 'Dollars', value: 100, number: ' e1234567890'},
+        {banknots: 'Dollars', value: 50, number: ' c1234567890'},
+        {banknots: 'RUBLS', value: 100, number: ' r1234567890'},
+        {banknots: 'Dollars', value: 50, number: ' x1234567890'},
+        {banknots: 'RUBLS', value: 50, number: ' v1234567890'},
+    ]);
 
-    let [a, setA] = useState(1)
+   const [filter, setFilter] = useState<FilterType>('All')
 
-    const onClickHandler = () => {
-        setA(++a)
+    let currentMoney = money;
+
+    if (filter === 'Dollar') {
+        currentMoney = money.filter(filteredMoney => filteredMoney.banknots === 'Dollars')
+    }
+    if (filter === 'Rubls') {
+        currentMoney = money.filter(filteredMoney => filteredMoney.banknots === 'RUBLS')
     }
 
-    const onClickReboot = () => {
-        setA(0)
+    const onClickFilterHandler = (nameButton: FilterType) => {
+    setFilter(nameButton)
     }
 
     return (
-        <div className="App">
-            <Cars cars={topCars}/>
-            {/*<Button name={'MyYouTubeChanel-1'} callBack={()=>ButtonFoo1('ivan')}/>*/}
-            {/*<Button name={'MyYouTubeChanel-2'} callBack={()=>ButtonFoo2('vasya')}/>*/}
-            {/*<Button name={'+'} callBack={ButtonFoo3}/>*/}
-            <h1 onClick={onClickHandler}>{a}</h1>
-            <button onClick={onClickReboot}>reboot</button>
+        <div className={'money-wrap'}>
+            <ul className="money-list">
+                {currentMoney.map((m, index) => {
+                    return (
+                        <li key={index}>
+                            <span>{m.banknots} </span>
+                            <span>{m.value} </span>
+                            <span>{m.number} </span>
+                        </li>
+                    );
+                })}
+            </ul>
+            <div style={{marginLeft: '35px'}}>
+                <Button name={'Dollar'} callBack={() => onClickFilterHandler('Dollar')}/>
+                <Button name={'Rubls'} callBack={() => onClickFilterHandler('Rubls')}/>
+                <Button name={'All'} callBack={() => onClickFilterHandler('All')}/></div>
         </div>
     )
 }

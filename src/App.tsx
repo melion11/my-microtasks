@@ -1,5 +1,6 @@
 import React from 'react';
 import {Cars, carType} from './map/topCars';
+import {Button} from './button/Button';
 
 function App() {
     const topCars: carType[] = [
@@ -8,34 +9,25 @@ function App() {
         {manufacturer: 'Audi', model: 'rs6'}
     ]
 
-    // function myFirstSubscriber () {
-    //     console.log('Hello, i am Vasya')
-    // }
-    //
-    // function mySecondSubscriber () {
-    //     console.log('Hello, i am Ivan')
-    // }
-
-    // const onClickHandler = (name: string) => {
-    //     console.log(name)
-    // }
-
-    const foo1 = () => {
-        console.log(100200)
+    const ButtonFoo1 = (name:string) => {
+        console.log(name)
     }
 
-    const foo2 = (num:number) => {
-       console.log(`в эту функцию пришло число ${num}`)
+    const ButtonFoo2 = (name:string) => {
+        console.log(name)
+    }
+
+    const ButtonFoo3 = () => {
+        console.log('im stupid button')
     }
 
     return (
         <div className="App">
             <Cars cars={topCars}/>
-            {/*<button onClick={(e)=> onClickHandler('Ivan')}>MyYouTubeChanel-1</button>*/}
-            {/*<button onClick={(e)=> onClickHandler('Vasya')}>MyYouTubeChanel-2</button>*/}
+            <Button name={'MyYouTubeChanel-1'} callBack={()=>ButtonFoo1('ivan')}/>
+            <Button name={'MyYouTubeChanel-2'} callBack={()=>ButtonFoo2('vasya')}/>
+            <Button name={'+'} callBack={ButtonFoo3}/>
 
-            <button onClick={foo1}>1</button>
-            <button onClick={()=> foo2(100200)}>2</button>
         </div>
     )
 }

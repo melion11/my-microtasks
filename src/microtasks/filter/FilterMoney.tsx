@@ -1,9 +1,9 @@
 import React from 'react';
 import {Button} from '../button/Button';
-import {FilterType} from '../../App';
 
 
 
+export type FilterType = 'All' | 'Dollar' | 'Rubls'
 
 type currentMoneyType = {
     banknots: string
